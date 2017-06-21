@@ -1,5 +1,6 @@
 package com.mchange.sc.v2.playjson
 
+import java.io.InputStream
 import play.api.libs.json._
 
 object JsValueSource {
@@ -14,6 +15,9 @@ object JsValueSource {
   }
   implicit final object SeqIsSource extends JsValueSource[Seq[Byte]] {
     def toJsValue( seq : Seq[Byte] ) : JsValue = Json.parse( seq.toArray )
+  }
+  implicit final object InputStreamIsSource extends JsValueSource[InputStream] {
+    def toJsValue( is : InputStream ) : JsValue = Json.parse( is )
   }
 }
 trait JsValueSource[T] {
