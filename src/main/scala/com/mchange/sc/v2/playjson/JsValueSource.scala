@@ -5,6 +5,8 @@ import play.api.libs.json._
 
 import java.nio.ByteBuffer
 
+import com.mchange.v3.nio.ByteBufferUtils
+
 object JsValueSource {
   implicit final object JsValueIsSource extends JsValueSource[JsValue] {
     def toJsValue( jsv : JsValue ) : JsValue = jsv
@@ -22,24 +24,7 @@ object JsValueSource {
     def toJsValue( is : InputStream ) : JsValue = Json.parse( is )
   }
   implicit final object ByteBufferIsSource extends JsValueSource[ByteBuffer] {
-    def toJsValue( bb : ByteBuffer ) : JsValue = Json.parse( newArray( bb ) )
-  }
-
-  // translated from mchange-commons-java com.mchange.v3.nio.ByteBufferUtils.newArray(...) to avoid
-  // a dependency on that library for just this
-  //
-  // if this library eventually comes to depend on mchange-commons-java (or mchange-commons-scala,
-  // which depends on mchange-commons-java), then get rid of this and just use that function
-
-  private def newArray( bb : ByteBuffer ) : Array[Byte] = {
-    if ( bb.hasArray() ) {
-      bb.array().clone().asInstanceOf[Array[Byte]];
-    }
-    else {
-      val out = Array.ofDim[Byte](bb.remaining())
-      bb.get(out)
-      out;
-    }
+    def toJsValue( bb : ByteBuffer ) : JsValue = Json.parse( ByteBufferUtils.newArray( bb ) )
   }
 }
 trait JsValueSource[T] {

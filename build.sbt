@@ -10,7 +10,7 @@ version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.2")
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.4")
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked" /*, "-Xlog-implicits" */)
 
@@ -31,10 +31,12 @@ publishTo <<= version {
   }
 }
 
+libraryDependencies += "com.mchange" %% "mchange-commons-scala" % "0.4.3-SNAPSHOT"
+
 libraryDependencies += {
   CrossVersion.partialVersion(Keys.scalaVersion.value) match {
     case Some((2, 12)) => {
-      "com.typesafe.play" %% "play-json" % "2.6.0-RC2"
+      "com.typesafe.play" %% "play-json" % "2.6.6"
     }
     case Some((2, 11)) => {
       "com.typesafe.play" %% "play-json" % "2.5.15"
