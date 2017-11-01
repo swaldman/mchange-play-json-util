@@ -1,9 +1,9 @@
 package com.mchange.sc.v2.playjson
 
 import java.io.InputStream
-import play.api.libs.json._
-
 import java.nio.ByteBuffer
+
+import play.api.libs.json._
 
 import com.mchange.v3.nio.ByteBufferUtils
 
