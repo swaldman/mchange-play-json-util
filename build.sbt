@@ -36,7 +36,7 @@ libraryDependencies += "com.mchange" %% "mchange-commons-scala" % "0.4.3-SNAPSHO
 libraryDependencies += {
   CrossVersion.partialVersion(Keys.scalaVersion.value) match {
     case Some((2, 12)) => {
-      "com.typesafe.play" %% "play-json" % "2.6.6"
+      "com.typesafe.play" %% "play-json" % "2.6.7"
     }
     case Some((2, 11)) => {
       "com.typesafe.play" %% "play-json" % "2.5.15"
