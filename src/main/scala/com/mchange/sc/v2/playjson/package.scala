@@ -52,7 +52,7 @@ package object playjson {
     def reads( jsv : JsValue ) : JsResult[T] = restrictTransform( restrictTransformers )( jsv ).flatMap( inner.reads _ )
   }
 
-  class RestrictintDefaultingReads[T]( spec : Map[String,Option[JsValue]] )( inner : Reads[T] ) extends RestrictTransformingReads( restrictKeysWithDefaults( spec ) :: Nil )( inner )
+  class RestrictingDefaultingReads[T]( spec : Map[String,Option[JsValue]] )( inner : Reads[T] ) extends RestrictTransformingReads( restrictKeysWithDefaults( spec ) :: Nil )( inner )
 
   class RestrictTransformingFormat[T]( restrictTransformers : Seq[JsValue => JsResult[JsValue]] )( inner : Format[T] ) extends Format[T] {
     def reads( jsv : JsValue ) : JsResult[T] = restrictTransform( restrictTransformers )( jsv ).flatMap( inner.reads _ )
