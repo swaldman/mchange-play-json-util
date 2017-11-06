@@ -15,7 +15,7 @@ package object playjson {
           JsError( s"""Could not read, found unexpected keys: ${unexpectedKeys.mkString(", ")}""" )
         }
       }
-      case oops => JsError( s"restrinctKeys requires a JsObject, found $oops" )
+      case oops => JsError( s"restrictKeys requires a JsObject, found $oops" )
     }
   }
 
