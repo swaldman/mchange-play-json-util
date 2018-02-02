@@ -6,7 +6,7 @@ organization := "com.mchange"
 
 name := "mchange-play-json-util"
 
-version := "0.0.2-SNAPSHOT"
+version := "0.0.2"
 
 scalaVersion := "2.11.8"
 
@@ -31,7 +31,7 @@ publishTo <<= version {
   }
 }
 
-libraryDependencies += "com.mchange" %% "mchange-commons-scala" % "0.4.3"
+libraryDependencies += "com.mchange" %% "mchange-commons-scala" % "0.4.4"
 
 libraryDependencies += {
   CrossVersion.partialVersion(Keys.scalaVersion.value) match {
