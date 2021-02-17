@@ -6,11 +6,11 @@ organization := "com.mchange"
 
 name := "mchange-play-json-util"
 
-version := "0.0.4"
+version := "0.0.5"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.13"
 
-crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.8")
+crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.13")
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked" /*, "-Xlog-implicits" */)
 
@@ -18,20 +18,18 @@ resolvers += ("releases" at nexusReleases)
 
 resolvers += ("snapshots" at nexusSnapshots)
 
-resolvers += ("Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases")
+resolvers += ("Scalaz Bintray Repo" at "https://dl.bintray.com/scalaz/releases")
 
-resolvers += ("Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/")
+resolvers += ("Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/")
 
-publishTo <<= version {
-  (v: String) => {
-    if (v.trim.endsWith("SNAPSHOT"))
-      Some("snapshots" at nexusSnapshots )
-    else
-      Some("releases"  at nexusReleases )
-  }
+publishTo := {
+  if (version.value.trim.endsWith("SNAPSHOT"))
+    Some("snapshots" at nexusSnapshots )
+  else
+    Some("releases"  at nexusReleases )
 }
 
-libraryDependencies += "com.mchange" %% "mchange-commons-scala" % "0.4.10"
+libraryDependencies += "com.mchange" %% "mchange-commons-scala" % "0.4.16"
 
 libraryDependencies += {
   CrossVersion.partialVersion(Keys.scalaVersion.value) match {
@@ -51,8 +49,9 @@ fork in (Test, run) := true
 
 javaOptions := Seq("-d64", "-Xms4g",  "-Xmx4g", "-verbose:gc", "-XX:+UnlockCommercialFeatures", "-XX:+FlightRecorder" )
 
-pomExtra <<= name {
-  (projectName : String ) => (
+pomExtra := {
+  val projectName = name.value
+  (
     <url>https://github.com/swaldman/{projectName}</url>
     <licenses>
       <license>
